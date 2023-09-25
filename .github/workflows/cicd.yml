@@ -7,26 +7,107 @@ on:
     branches: [ "main" ]
 
 jobs:
-  Verification:
+  Install:
     runs-on: ubuntu-latest
 
-    strategy:
-      matrix:
-        node-version: [18.x]
-
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
 
-    - name: Use Node.js ${{ matrix.node-version }}
+    - name: Use Node.js 18.18
       uses: actions/setup-node@v3
       with:
-        node-version: ${{ matrix.node-version }}
+        node-version: 18
+        cache: npm
 
-    - name: Install
-      run: npm ci
+    - name: Install dependencies
+      uses: ./.github/actions/install-dependencies
+
+  Build:
+    runs-on: ubuntu-latest
+    needs: [Install]
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Use Node.js 18
+      uses: actions/setup-node@v3
+      with:
+        node-version: 18
+
+    - name: Install dependencies
+      uses: ./.github/actions/install-dependencies
 
     - name: Build
-      run: npm run build
+      run: npm run build-only
+
+  Integrity:
+    runs-on: ubuntu-latest
+    needs: [Install]
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Use Node.js 18
+      uses: actions/setup-node@v3
+      with:
+        node-version: 18
+
+    - name: Install dependencies
+      uses: ./.github/actions/install-dependencies
+
+    - name: Type integrity
+      run: npm run type-check
+
+  CodeLint:
+    runs-on: ubuntu-latest
+    needs: [Install]
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Use Node.js 18
+      uses: actions/setup-node@v3
+      with:
+        node-version: 18
+
+    - name: Install dependencies
+      uses: ./.github/actions/install-dependencies
+
+    - name: Code lint
+      run: npm run code-lint
+
+  StyleLint:
+    runs-on: ubuntu-latest
+    needs: [Install]
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Use Node.js 18
+      uses: actions/setup-node@v3
+      with:
+        node-version: 18
+
+    - name: Install dependencies
+      uses: ./.github/actions/install-dependencies
+
+    - name: Style lint
+      run: npm run style-lint
+
+  Tests:
+    runs-on: ubuntu-latest
+    needs: [Install]
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Use Node.js 18
+      uses: actions/setup-node@v3
+      with:
+        node-version: 18
+
+    - name: Install dependencies
+      uses: ./.github/actions/install-dependencies
 
     - name: Test
-      run: npm run test:unit
+      run: npm run test

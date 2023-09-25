@@ -1,0 +1,22 @@
+name: On Dependency Update
+
+on:
+  push:
+    branches: [ "main" ]
+    paths:
+      - "package-lock.lock"
+  pull_request:
+    branches: [ "main" ]
+    paths:
+      - "package-lock.lock"
+
+jobs:
+  RebuildCache:
+    name: Rebuild Android Cache
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Rebuild cache
+        uses: ./.github/actions/install-dependencies
