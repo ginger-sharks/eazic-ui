@@ -1,22 +1,79 @@
-<script setup lang="ts">
-import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
-</script>
-
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
-
-    <div class="wrapper">
-      <HelloWorld msg="Hello world" />
-
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-      </nav>
-    </div>
-  </header>
-
-  <RouterView />
+  <nav>
+    <div>
+        <router-link to="/">
+          Home
+        </router-link>
+        <router-link to="/login" v-if="!authenticated">
+          Login
+        </router-link>
+        <router-link to="/profile" v-if="authenticated" >
+          Profile
+        </router-link>
+        <router-link to="/about">
+          About
+        </router-link>
+        <a v-if="authenticated" v-on:click="logout()">
+          Logout
+        </a>
+      </div>
+  </nav>
+  <div id="content">
+      <router-view/>
+  </div>
 </template>
 
+<style>
+  #app {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+}
+
+nav {
+  padding: 30px;
+}
+
+nav a {
+  font-weight: bold;
+  color: #2c3e50;
+}
+
+nav a.router-link-exact-active {
+  color: #42b983;
+}
+a {
+  text-decoration: underline;
+  cursor: pointer;
+}
+</style>
+
+<script>
+//import { RouterLink, RouterView } from 'vue-router'
+//import HelloWorld from './components/HelloWorld.vue'
+
+export default {
+  name: 'app',
+  data: function () {
+    return { authenticated: false }
+  },
+  async created () {
+    await this.isAuthenticated()
+    this.$auth.authStateManager.subscribe(this.isAuthenticated)
+  },
+  watch: {
+    // Everytime the route changes, check for auth status
+    '$route': 'isAuthenticated'
+  },
+  methods: {
+    async isAuthenticated () {
+      this.authenticated = await this.$auth.isAuthenticated()
+    },
+    async logout () {
+      await this.$auth.signOut()
+    }
+  }
+}
+</script>
