@@ -4,8 +4,12 @@
   </div>
 </template>
 
+<style lang="scss">
+  import '@okta/okta-signin-widget/dist/css/okta-sign-in.min.css'
+</style>
+
 <script>
-import '@okta/okta-signin-widget/dist/css/okta-sign-in.min.css'
+//import '@okta/okta-signin-widget/dist/css/okta-sign-in.min.css'
 import {oktaSignIn} from '../okta'
 
 export default {
