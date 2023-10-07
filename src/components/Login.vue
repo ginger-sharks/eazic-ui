@@ -1,24 +1,12 @@
-<template>
-  <div class="login">
-    <div id="okta-signin-container"></div>
-  </div>
-</template>
-
-<style lang="scss">
-  import '@okta/okta-signin-widget/dist/css/okta-sign-in.min.css'
-</style>
-
 <script>
-//import '@okta/okta-signin-widget/dist/css/okta-sign-in.min.css'
 import {oktaSignIn} from '../okta'
+import {oktaAuth} from '../okta'
 
 export default {
   name: 'Login',
   mounted: function () {
     this.$nextTick(function () {
-      oktaSignIn.showSignInAndRedirect(
-          { el: '#okta-signin-container' }
-      )
+      oktaAuth.signInWithRedirect({ originalUri: '/' })
     })
   },
   unmounted () {
