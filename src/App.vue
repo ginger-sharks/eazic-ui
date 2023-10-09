@@ -33,7 +33,7 @@
 }
 
 nav {
-  padding: 30px;
+  padding: 3rem;
 }
 
 nav a {
@@ -50,7 +50,7 @@ a {
 }
 </style>
 
-<script>
+<script lang="ts">
 //import { RouterLink, RouterView } from 'vue-router'
 //import HelloWorld from './components/HelloWorld.vue'
 

@@ -12,9 +12,7 @@
   </div>
 </template>
 
-<script>
-
-import axios from 'axios';
+<script lang="ts">
 
 export default {
   name: 'home',
@@ -31,14 +29,6 @@ export default {
         this.claims = await this.$auth.getUser()
         let accessToken = this.$auth.getAccessToken();
         console.log(`Authorization: Bearer ${accessToken}`);
-        /*try {
-          let response = await axios.get('http://localhost:8082/howcaffeinatedami',
-              { headers: {'Authorization': 'Bearer ' + accessToken } } );
-          this.caffeineLevel = response.data;
-        }
-        catch (error) {
-          this.caffeineLevel = `${error}`
-        }*/
       }
     }
   }

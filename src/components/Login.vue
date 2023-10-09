@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 import {oktaSignIn} from '../okta'
 import {oktaAuth} from '../okta'
 
