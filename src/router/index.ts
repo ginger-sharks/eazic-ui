@@ -8,36 +8,33 @@ const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
-    path: '/',
-    name: 'home',
-    component: HomeComponent,
-    meta: {
-        requiresAuth: true
-      }
-  },
-  {
+      path: '/',
+      name: 'home',
+      component: HomeComponent
+    },
+    {
       path: '/login',
       component: LoginComponent
-  },
-  {
+    },
+    {
       path: '/login/callback',
       component: LoginCallback
-  },
-  {
+    },
+    {
       path: '/profile',
       component: ProfileComponent,
       meta: {
         requiresAuth: true
       }
-  },
-  {
-    path: '/about',
-    name: 'about',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
-  }
+    },
+    {
+      path: '/about',
+      name: 'about',
+      // route level code-splitting
+      // this generates a separate chunk (about.[hash].js) for this route
+      // which is lazy-loaded when the route is visited.
+      component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
+    }
   ]
 })
 
