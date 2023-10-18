@@ -15,11 +15,10 @@
 </template>
 
 <script lang="ts" setup>
-import type { CustomUserClaims, UserClaims } from '@okta/okta-auth-js'
 import { useAuth } from '@okta/okta-vue'
 import { onMounted, ref } from 'vue'
 
-const claims = ref<UserClaims<CustomUserClaims>>()
+const claims = ref()
 const isAuthenticated = ref<boolean>()
 const auth = useAuth()
 

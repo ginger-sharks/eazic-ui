@@ -1,76 +1,70 @@
+<script setup lang="ts">
+import EazicBar from '@/components/EazicBar.vue'
+import { useAuth } from '@okta/okta-vue'
+import { onMounted, ref } from 'vue'
+import { RouterView } from 'vue-router'
+
+const authenticated = ref<boolean>(false)
+const auth = useAuth()
+
+onMounted(async () => {
+  await isAuthenticated()
+  auth.authStateManager.subscribe(isAuthenticated)
+})
+
+async function isAuthenticated() {
+  authenticated.value = await auth.isAuthenticated()
+}
+
+async function logout() {
+  await auth.signOut()
+}
+</script>
+
 <template>
-  <nav>
-    <div>
-        <router-link to="/">
-          Home
-        </router-link>
-        <router-link to="/login" v-if="!authenticated">
-          Login
-        </router-link>
-        <router-link to="/profile" v-if="authenticated" >
-          Profile
-        </router-link>
-        <router-link to="/about">
-          About
-        </router-link>
-        <a v-if="authenticated" v-on:click="logout()">
-          Logout
-        </a>
-      </div>
-  </nav>
-  <div id="content">
-      <router-view/>
+  <!--  <header>
+    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
+
+    <div class="wrapper">
+      <HelloWorld msg="Hello world" />
+
+      <nav>
+        <RouterLink to="/">Home</RouterLink>
+        <RouterLink to="/about">About</RouterLink>
+      </nav>
+    </div>
+  </header>-->
+  <div class="eazic-app">
+    <div class="router-view">
+      <RouterView />
+    </div>
+    <EazicBar />
   </div>
 </template>
 
-<style>
-  #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-nav {
-  padding: 3rem;
-}
-a {
-  text-decoration: underline;
-  cursor: pointer;
-}
-nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-nav a.router-link-exact-active {
-  color: #42b983;
-}
-</style>
+<style lang="scss" scoped>
+@import '@/assets/base';
+.eazic-app {
+  display: grid;
+  width: 100vw;
+  height: 100vh;
+  grid-template-rows: 1fr auto;
 
-<script lang="ts">
-//import { RouterLink, RouterView } from 'vue-router'
-//import HelloWorld from './components/HelloWorld.vue'
+  .eazic-bar {
+    grid-row: 0;
+  }
 
-export default {
-  name: 'app',
-  data: function () {
-    return { authenticated: false }
-  },
-  async created () {
-    await this.isAuthenticated()
-    this.$auth.authStateManager.subscribe(this.isAuthenticated)
-  },
-  watch: {
-    // Everytime the route changes, check for auth status
-    '$route': 'isAuthenticated'
-  },
-  methods: {
-    async isAuthenticated () {
-      this.authenticated = await this.$auth.isAuthenticated()
-    },
-    async logout () {
-      await this.$auth.signOut()
+  .router-view {
+    background-color: $black;
+    color: $white;
+  }
+
+  @media only screen and (min-width: 42.5rem) {
+    grid-template-rows: auto 1fr;
+
+    .eazic-bar {
+      grid-row: 1;
     }
   }
 }
-</script>
+</style>
