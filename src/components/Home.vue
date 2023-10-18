@@ -13,19 +13,18 @@
 </template>
 
 <script lang="ts">
-
 export default {
   name: 'home',
   data: function () {
     return {
       claims: '',
-      caffeineLevel: ''
+      result: ''
     }
   },
   created () { this.setup() },
   methods: {
     async setup () {
-      if (this.$root.authenticated) {
+      if (this.$root != null && this.$root.authenticated) {
         this.claims = await this.$auth.getUser()
         let accessToken = this.$auth.getAccessToken();
         console.log(`Authorization: Bearer ${accessToken}`);
