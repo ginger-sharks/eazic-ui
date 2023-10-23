@@ -1,4 +1,4 @@
-import '@/assets/main.scss'
+import './assets/main.css'
 import { OktaAuth } from '@okta/okta-auth-js'
 
 import { createApp } from 'vue'
@@ -11,6 +11,7 @@ import OktaVue from '@okta/okta-vue'
 
 const app = createApp(App)
 
+const yourOktaUri = 'https://dev-77536915.okta.com'
 const clientId = '0oabnu0zcoU50WOG85d7'
 
 const oktaAuth = new OktaAuth({

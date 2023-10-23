@@ -10,9 +10,7 @@
   "compilerOptions": {
     "composite": true,
     "module": "ESNext",
-    "moduleResolution": "node",
-    "types": ["node"],
-    "noImplicitAny": false,
-    "allowJs": true
+    "moduleResolution": "Bundler",
+    "types": ["node"]
   }
 }

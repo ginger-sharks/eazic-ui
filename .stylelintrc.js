@@ -1,8 +1,9 @@
 module.exports = {
   root: true,
-  plugins: ['stylelint-scss'],
-  extends: 'stylelint-config-recommended-vue/scss',
-  ignoreFiles: ['src/stories/*', 'src/assets/*'],
+  plugins: [
+    "stylelint-scss"
+  ],
+  extends: "stylelint-config-recommended-vue/scss",
   rules: {
     'at-rule-empty-line-before': null,
     'at-rule-no-unknown': null,
@@ -11,5 +12,5 @@ module.exports = {
     'rule-empty-line-before': null,
     'selector-list-comma-newline-after': null,
     'unit-disallowed-list': ['px']
-  }
-}
+  },
+};
