@@ -1,39 +1,24 @@
 <script setup lang="ts">
-import { useAuth } from '@okta/okta-vue'
-import { onMounted, ref } from 'vue'
-import { useRouter } from 'vue-router'
+import EazicMenu from '@/components/EazicMenu.vue'
+import { ref } from 'vue'
 
 defineProps<{
   showPlayer?: boolean
+  authenticated?: boolean
 }>()
 
 const userMenuOpen = ref<boolean>(false)
-const authenticated = ref<boolean>(false)
-const auth = useAuth()
-
-onMounted(async () => {
-  await isAuthenticated()
-  auth.authStateManager.subscribe(isAuthenticated)
-})
-
-const router = useRouter()
 
 function toggleUserMenu() {
   userMenuOpen.value = !userMenuOpen.value
 }
 
-async function isAuthenticated() {
-  authenticated.value = await auth.isAuthenticated()
-}
-
 function logIn() {
   console.log('Log in')
-  router.push('/login')
 }
 
 function logOut() {
   console.log('Log out')
-  auth.signOut()
 }
 
 function signUp() {
@@ -42,7 +27,6 @@ function signUp() {
 
 function openSettings() {
   console.log('Open settings')
-  router.push('/profile')
 }
 </script>
 
@@ -60,7 +44,7 @@ function openSettings() {
       <div>SALON</div>
     </nav>
     <div class="eazic-bar__user">
-      <!--      <eazic-menu
+      <eazic-menu
         :is-open="userMenuOpen"
         :is-authenticated="authenticated"
         @toggle-menu="toggleUserMenu"
@@ -68,8 +52,7 @@ function openSettings() {
         @login="logIn"
         @logout="logOut"
         @open-settings="openSettings"
-      />-->
-      <i class="fa-regular fa-circle-user fa-xl navbar-link is-arrowless"></i>
+      />
     </div>
   </div>
 </template>
