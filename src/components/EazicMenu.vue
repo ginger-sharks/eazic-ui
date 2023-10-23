@@ -54,12 +54,14 @@ function signUp() {
           :src="user?.avatar"
           :alt="`${user?.name} avatar`"
         />
-        <i
+        <font-awesome-icon
           v-else
-          class="fa-regular fa-circle-user fa-xl navbar-link is-arrowless"
+          :icon="['fas', 'user']"
+          size="xl"
+          class="navbar-link is-arrowless"
           aria-haspopup="true"
           aria-controls="user-dropdown"
-        ></i>
+        ></font-awesome-icon>
       </div>
       <div class="dropdown-menu" id="user-dropdown" role="menu">
         <div v-if="!isAuthenticated" class="dropdown-content">
@@ -97,7 +99,7 @@ function signUp() {
     height: 100%;
 
     .dropdown-trigger {
-      i {
+      svg {
         color: $white;
 
         &:hover {
