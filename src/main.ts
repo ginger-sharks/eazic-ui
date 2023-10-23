@@ -1,4 +1,5 @@
 import '@/assets/main.scss'
+import '../node_modules/bulma/css/bulma.css'
 import { OktaAuth } from '@okta/okta-auth-js'
 
 import { createApp } from 'vue'
