@@ -1,8 +1,8 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import { LoginCallback, navigationGuard } from '@okta/okta-vue'
-import HomeComponent from '../components/Home.vue'
-import LoginComponent from '../components/Login.vue'
-import ProfileComponent from '../views/ProfileView.vue'
+import LoginView from '../views/LoginView.vue'
+import ProfileView from '@/views/ProfileView.vue'
+import HomeView from '@/views/HomeView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -10,14 +10,11 @@ const router = createRouter({
     {
       path: '/',
       name: 'home',
-      component: HomeComponent,
-      meta: {
-        requiresAuth: true
-      }
+      component: HomeView
     },
     {
       path: '/login',
-      component: LoginComponent
+      component: LoginView
     },
     {
       path: '/login/callback',
@@ -25,7 +22,7 @@ const router = createRouter({
     },
     {
       path: '/profile',
-      component: ProfileComponent,
+      component: ProfileView,
       meta: {
         requiresAuth: true
       }
