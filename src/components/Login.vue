@@ -1,17 +1,10 @@
-<script lang="ts">
-import {oktaSignIn} from '../okta'
-import {oktaAuth} from '../okta'
+<script lang="ts" setup>
+import { useAuth } from '@okta/okta-vue'
+import { onBeforeMount } from 'vue'
 
-export default {
-  name: 'Login',
-  mounted: function () {
-    this.$nextTick(function () {
-      oktaAuth.signInWithRedirect({ originalUri: '/' })
-    })
-  },
-  unmounted () {
-    // Remove the widget from the DOM on path change
-    oktaSignIn.remove()
-  }
-}
+const auth = useAuth()
+
+onBeforeMount(() => {
+  auth.signInWithRedirect({ originalUri: '/' })
+})
 </script>
