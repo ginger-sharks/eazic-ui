@@ -1,0 +1,37 @@
+name: CICD
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  Verification:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Use Node.js 18.x
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18.x
+
+      - name: Install
+        run: npm ci
+
+      - name: Type integrity
+        run: npm run type-check
+
+      - name: Build
+        run: npm run build-only
+
+      - name: Code lint
+        run: npm run code-lint
+
+      - name: Style lint
+        run: npm run style-lint
+
+      - name: Test
+        run: npm run test
