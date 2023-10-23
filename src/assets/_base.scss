@@ -1,0 +1,20 @@
+$white: #dadada;
+$grey: #95a5a6;
+$black: #252525;
+$yellow: #f6a22a;
+$red: #f54b3a;
+$green: #2fcc71;
+$blue: #52b3d9;
+$info: $blue;
+$warning: $yellow;
+$danger: $red;
+$success: $green;
+$family-sans-serif: 'Zen Loop', cursive;
+$dropdown-item-hover-color: $success;
+
+html {
+	/* stylelint-disable */
+	font-size: 16px;
+	background-color: $black;
+}
+
