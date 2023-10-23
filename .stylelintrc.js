@@ -9,6 +9,7 @@ module.exports = {
     'declaration-empty-line-before': null,
     'rule-empty-line-before': null,
     'selector-list-comma-newline-after': null,
-    'unit-disallowed-list': ['px']
+    'unit-disallowed-list': ['px'],
+    'media-feature-range-notation': null
   }
 }

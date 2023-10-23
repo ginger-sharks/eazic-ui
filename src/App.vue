@@ -1,30 +1,21 @@
 <template>
   <nav>
     <div>
-        <router-link to="/">
-          Home
-        </router-link>
-        <router-link to="/login" v-if="!authenticated">
-          Login
-        </router-link>
-        <router-link to="/profile" v-if="authenticated" >
-          Profile
-        </router-link>
-        <router-link to="/about">
-          About
-        </router-link>
-        <a v-if="authenticated" v-on:click="logout()">
-          Logout
-        </a>
-      </div>
+      <eazic-bar />
+      <router-link to="/"> Home </router-link>
+      <router-link to="/login" v-if="!authenticated"> Login </router-link>
+      <router-link to="/profile" v-if="authenticated"> Profile </router-link>
+      <router-link to="/about"> About </router-link>
+      <a v-if="authenticated" v-on:click="logout()"> Logout </a>
+    </div>
   </nav>
   <div id="content">
-      <router-view/>
+    <router-view />
   </div>
 </template>
 
-<style>
-  #app {
+<style lang="scss" scoped>
+#app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -47,30 +38,24 @@ nav a.router-link-exact-active {
 }
 </style>
 
-<script lang="ts">
-//import { RouterLink, RouterView } from 'vue-router'
-//import HelloWorld from './components/HelloWorld.vue'
+<script lang="ts" setup>
+import EazicBar from '@/components/EazicBar.vue'
+import { useAuth } from '@okta/okta-vue'
+import { onMounted, ref } from 'vue'
 
-export default {
-  name: 'app',
-  data: function () {
-    return { authenticated: false }
-  },
-  async created () {
-    await this.isAuthenticated()
-    this.$auth.authStateManager.subscribe(this.isAuthenticated)
-  },
-  watch: {
-    // Everytime the route changes, check for auth status
-    '$route': 'isAuthenticated'
-  },
-  methods: {
-    async isAuthenticated () {
-      this.authenticated = await this.$auth.isAuthenticated()
-    },
-    async logout () {
-      await this.$auth.signOut()
-    }
-  }
+const authenticated = ref<boolean>(false)
+const auth = useAuth()
+
+onMounted(async () => {
+  await isAuthenticated()
+  auth.authStateManager.subscribe(isAuthenticated)
+})
+
+async function isAuthenticated() {
+  authenticated.value = await auth.isAuthenticated()
+}
+
+async function logout() {
+  await auth.signOut()
 }
 </script>
