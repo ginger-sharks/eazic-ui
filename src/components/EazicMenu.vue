@@ -48,12 +48,12 @@ function signUp() {
       :class="['dropdown', { 'is-up': isMobile, 'is-active': isOpen, 'is-right': !isLeftAligned }]"
     >
       <div class="dropdown-trigger is-flex">
-        <img
+        <font-awesome-icon
           v-if="isAuthenticated"
+          :icon="['fas', 'user-circle']"
+          size="xl"
           class="is-rounded"
-          :src="user?.avatar"
-          :alt="`${user?.name} avatar`"
-        />
+        ></font-awesome-icon>
         <font-awesome-icon
           v-else
           :icon="['fas', 'user']"

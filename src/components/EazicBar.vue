@@ -7,26 +7,33 @@ defineProps<{
   authenticated?: boolean
 }>()
 
+const emit = defineEmits<{
+  (e: 'open-settings'): void
+  (e: 'logout'): void
+  (e: 'login'): void
+  (e: 'signup'): void
+}>()
+
 const userMenuOpen = ref<boolean>(false)
 
 function toggleUserMenu() {
   userMenuOpen.value = !userMenuOpen.value
 }
 
-function logIn() {
-  console.log('Log in')
+function openSettings() {
+  emit('open-settings')
 }
 
 function logOut() {
-  console.log('Log out')
+  emit('logout')
+}
+
+function logIn() {
+  emit('login')
 }
 
 function signUp() {
-  console.log('Sign up')
-}
-
-function openSettings() {
-  console.log('Open settings')
+  emit('signup')
 }
 </script>
 
