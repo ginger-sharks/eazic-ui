@@ -47,7 +47,7 @@ function signUp() {
     <div
       :class="['dropdown', { 'is-up': isMobile, 'is-active': isOpen, 'is-right': !isLeftAligned }]"
     >
-      <div class="dropdown-trigger is-flex">
+      <div class="dropdown-trigger is-flex is-align-items-center">
         <font-awesome-icon
           v-if="isAuthenticated"
           :icon="['fas', 'user-circle']"
@@ -94,6 +94,13 @@ function signUp() {
 
 .eazic-user-widget {
   height: 100%;
+  width: 100%;
+
+  &:hover {
+    svg {
+      color: $black !important;
+    }
+  }
 
   .dropdown {
     height: 100%;
@@ -103,7 +110,6 @@ function signUp() {
         color: $white;
 
         &:hover {
-          color: $black;
           border-radius: 0 0 0.5rem 0.5rem;
         }
       }

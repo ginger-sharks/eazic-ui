@@ -46,11 +46,29 @@ function signUp() {
     <div class="eazic-bar__player">player</div>
     <nav class="eazic-bar__navigation">
       <div>
-        <RouterLink to="explore">EXPLORE</RouterLink>
+        <RouterLink to="explore">
+          <font-awesome-icon :icon="['fas', 'search']" size="xl"></font-awesome-icon>
+          <span class="is-hidden-mobile">Explore</span>
+        </RouterLink>
       </div>
-      <div>PLAYER</div>
-      <div>PLAYLIST</div>
-      <div>SALON</div>
+      <div>
+        <RouterLink to="explore">
+          <font-awesome-icon :icon="['fas', 'circle-play']" size="xl"></font-awesome-icon>
+          <span class="is-hidden-mobile">Player</span>
+        </RouterLink>
+      </div>
+      <div>
+        <RouterLink to="explore">
+          <font-awesome-icon :icon="['fas', 'rectangle-list']" size="xl"></font-awesome-icon>
+          <span class="is-hidden-mobile">Playlist</span>
+        </RouterLink>
+      </div>
+      <div>
+        <RouterLink to="explore">
+          <font-awesome-icon :icon="['fas', 'users-rectangle']" size="xl"></font-awesome-icon>
+          <span class="is-hidden-mobile">Salon</span>
+        </RouterLink>
+      </div>
     </nav>
     <div class="eazic-bar__user">
       <eazic-menu
@@ -93,7 +111,7 @@ function signUp() {
 
     h1 {
       margin: 0;
-      font-size: 1.5rem;
+      font-size: 1rem;
     }
   }
 
@@ -107,8 +125,7 @@ function signUp() {
     grid-template-columns: 1fr 1fr 1fr 1fr;
     gap: 0.2rem;
     align-items: center;
-    font-size: calc(1rem + 3vw);
-    font-weight: bold;
+    font-size: calc(1rem);
 
     div {
       cursor: pointer;
@@ -118,9 +135,21 @@ function signUp() {
       background-color: $black;
       transition: all 300ms ease;
 
+      a {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 0.5rem;
+        height: 100%;
+      }
+
       &:hover {
-        background-color: rgba($white, 0.1);
-        font-size: calc(1rem + 4vw);
+        background-color: $white;
+        font-size: calc(1rem + 1vw);
+
+        a {
+          color: $black;
+        }
       }
 
       &:nth-child(1) {
@@ -148,11 +177,11 @@ function signUp() {
     cursor: pointer;
 
     &:hover {
-      background-color: rgba($white, 0.1);
+      background-color: $white;
     }
   }
 
-  @media only screen and (min-width: 42.5rem) {
+  @media only screen and (min-width: 48rem) {
     grid-template-columns: auto 1fr 3.1rem;
 
     &__brand {
@@ -212,11 +241,10 @@ function signUp() {
       padding: 0 1rem;
 
       div {
-        font-size: calc(1rem + 2vw);
+        font-size: calc(1rem + 0.5rem);
 
         &:hover {
-          background-color: rgba($white, 0.1);
-          font-size: calc(1rem + 2.2vw);
+          font-size: calc(1rem + 1vw);
         }
       }
     }

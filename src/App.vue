@@ -52,21 +52,35 @@ async function openSettings() {
   width: 100vw;
   height: 100vh;
   grid-template-rows: 1fr auto;
+  overflow: hidden;
+  background-color: $black;
 
   .eazic-bar {
     grid-row: 0;
   }
 
   .router-view {
-    background-color: $black;
+    background-color: #252525;
     color: $white;
+    display: grid;
+    grid-template-rows: calc(100vh - 4rem) auto;
+    width: 100%;
+    max-width: 100vw;
   }
 
-  @media only screen and (min-width: 42.5rem) {
+  @media only screen and (min-width: 48rem) {
     grid-template-rows: auto 1fr;
 
     .eazic-bar {
       grid-row: 1;
+    }
+  }
+
+  @media only screen and (min-width: 64rem) {
+    .router-view {
+      overflow: hidden;
+      margin: auto;
+      max-width: 80rem;
     }
   }
 }
