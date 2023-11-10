@@ -23,8 +23,9 @@ const auth = useAuth()
 async function search() {
   console.log('searching with ' + keywords.value)
   let accessToken = auth.getAccessToken()
+  console.log(accessToken)
   try {
-    let response = await axios.get('http://localhost:8082/youtube/search/' + keywords.value, {
+    let response = await axios.get('http://localhost:8082/youtubefree/search/' + keywords.value, {
       headers: { Authorization: 'Bearer ' + accessToken }
     })
     result.value = response.data

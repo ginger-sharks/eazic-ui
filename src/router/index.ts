@@ -28,6 +28,11 @@ const router = createRouter({
       }
     },
     {
+      path: '/explore',
+      name: 'explore',
+      component: () => import(/* webpackChunkName: "about" */ '../views/Explore.vue')
+    },
+    {
       path: '/about',
       name: 'about',
       // route level code-splitting
