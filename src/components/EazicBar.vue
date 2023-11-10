@@ -41,11 +41,13 @@ function signUp() {
   <div class="eazic-bar">
     <div class="eazic-bar__brand">
       <img src="@/assets/logo.gif" alt="eazic logo" />
-      <h1>EAZIC</h1>
+      <h1><RouterLink to="/">EAZIC</RouterLink></h1>
     </div>
     <div class="eazic-bar__player">player</div>
     <nav class="eazic-bar__navigation">
-      <div>EXPLORE</div>
+      <div>
+        <RouterLink to="explore">EXPLORE</RouterLink>
+      </div>
       <div>PLAYER</div>
       <div>PLAYLIST</div>
       <div>SALON</div>
