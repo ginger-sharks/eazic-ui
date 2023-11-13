@@ -15,7 +15,7 @@
         <input class="input" type="text" placeholder="Keywords..." required v-model="keywords" />
       </p>
       <p class="control">
-        <a type="button" class="explore__submit button is-primary is-small">Search</a>
+        <a type="button" class="explore__submit button is-primary is-small" v-on:click="search()">Search</a>
       </p>
     </form>
     <section class="explore__results">
@@ -52,7 +52,7 @@ import { useAuth } from '@okta/okta-vue'
 import { ref } from 'vue'
 import axios from 'axios'
 
-const keywords = ref<string>('toto')
+const keywords = ref<string>('')
 const results = ref<YoutubeSearchResultItem[]>([])
 const errore = ref<any>()
 const auth = useAuth()
@@ -61,7 +61,7 @@ async function search() {
   let accessToken = auth.getAccessToken()
   try {
     let response = await axios.get<YoutubeSearchResult>(
-      'http://localhost:8082/youtubefree/search?keywords=' + keywords.value,
+      'http://localhost:8082/youtubefree/search?query=' + keywords.value,
       {
         headers: { Authorization: 'Bearer ' + accessToken }
       }
